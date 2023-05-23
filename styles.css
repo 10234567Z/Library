@@ -9,6 +9,7 @@
     height: 100vh;
     display: grid;
     grid-template-rows: fit-content(150px) auto;
+    gap: 20px;
 }
 
 .titleBar{
@@ -22,6 +23,17 @@
 .collection{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    grid-template-rows: repeat(auto-fit,450px);
     gap: 10px;
     align-items: start;
+}
+
+.addBook {
+    font-size: xx-large;
+    justify-self: center;
+    align-self: center;
+}
+
+.collection > div {
+    max-height: 400px;
 }

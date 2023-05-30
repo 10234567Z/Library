@@ -10,15 +10,33 @@
 </head>
 <body>
     <div class="container">
+        <form action="" method="get">
+            <div class="bookName">
+                <label for="name">Book Name<br></label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="writerName">
+                <label for="authorName">Author Name<br></label>
+                <input type="text" id="authorName" required>
+            </div>
+            <div class="pagesAmount">
+                <label for="pages">No. of Pages<br></label>
+                <input type="number" id="pages" required>
+            </div>
+            <div class="status">
+                <label for="readStatus">Have you read the complete book?</label>
+                <input type="checkbox" id="readStatus" required>
+            </div>
+            <div class="buttonSubmit">
+                <input type="submit" placeholder="Submit">
+            </div>
+        </form>
+        <div class="addBook">+</div>
         <div class="titleBar">
             <h1>Library</h1>
         </div>
         <div class="collection">
-            <h1 class="addBook">+</h1>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+
         </div>
     </div>
 </body>

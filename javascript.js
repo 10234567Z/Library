@@ -7,6 +7,19 @@ function Book(bookName,pages,readStatus){
     }
 }
 
+let addButton = document.querySelector('.addBook');
+let form = document.querySelector('form');
+
+addButton.addEventListener('mousedown' , () => {
+
+    if(form.style.display == 'grid'){
+        form.style.display = 'none';
+    }
+    else{
+        form.style.display = 'grid';
+    }
+})
+
 
 // let bookName = prompt('Please provide a book name' , '');
 // let pages = prompt('Please provide the no. of pages in the book you want to add' , '');

@@ -2,14 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 .container{
+    margin: 0;
     width: 100vw;
     height: 100vh;
     display: grid;
     grid-template-rows: fit-content(150px) auto;
     gap: 20px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    transition: all 0.4s;
+    user-select: none;
 }
 
 .titleBar{
@@ -23,17 +29,89 @@
 .collection{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-    grid-template-rows: repeat(auto-fit,450px);
+    grid-template-rows: repeat(auto-fit,fit-content(400px));
     gap: 10px;
     align-items: start;
 }
 
 .addBook {
-    font-size: xx-large;
-    justify-self: center;
-    align-self: center;
+    height: 100px;
+    width: 100px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #0900E4;
+    color: aliceblue;
+    margin: 35px;
+    transition: transform 0.8s;
 }
 
-.collection > div {
-    max-height: 400px;
+.addBook:hover {
+    background-color: #0700A7;
+    cursor: grab;
+    transform: rotate(180deg);
+}
+.collection > div:not(.addBook) {
+    height: 400px;
+}
+
+form{
+    right: 0;
+    bottom: 16vh;
+    position: fixed;
+    background-color: #B9B9B9;
+    border-radius: 10px;
+    transition: all 0.7s;
+    padding: 10px;
+    grid-template-rows: repeat(auto-fit,1fr);
+    gap: 10px;
+    width: 400px;
+    height: 600px;
+    display: none;
+    transition: all 0.8s;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+label {
+    font-size: 20px;
+    margin: 10px;
+}
+
+input[type='number'],input[type='text']{
+    outline: none !important;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+.status {
+    display: grid;
+    grid-template-columns: repeat(2,fit-content(400px));
+    align-items: center;
+}
+
+input[type='submit']{
+    height: 50px;
+    width: 40%;
+    border-radius: 16px;
+    font-size: 1em;
+}
+
+.buttonSubmit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }

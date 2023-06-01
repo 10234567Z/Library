@@ -91,7 +91,7 @@ label {
     margin: 10px;
 }
 
-input[type='number'],input[type='text']{
+input[type='tel'],input[type='text']{
     outline: none !important;
     height: 50px;
     border-radius: 10px;

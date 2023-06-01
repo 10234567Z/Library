@@ -17,6 +17,7 @@ addButton.addEventListener('mousedown', () => {
     if (form.style.display === 'grid') {
         form.style.display = 'none';
         processForm.length = 0;
+        ResetForm();
     }
     else {
         form.style.display = 'grid';
@@ -32,11 +33,19 @@ document.querySelector('.submitButton').addEventListener('mousedown', () => {
     }
     let processBool = processForm.length >= 5 && processForm.every(e => e === processForm[0]);
     if (processBool) {
+        ResetForm();
         form.style.display = 'none';
         processForm.length = 0;
         AddBook();
     }
 })
+
+
+function ResetForm(){
+    for(i = 0; i < allInputs.length; i++){
+        allInputs[i].value = '';
+    }
+}
 
 function AddBook() {
     console.log('reached');

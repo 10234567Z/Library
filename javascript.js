@@ -33,10 +33,16 @@ document.querySelector('.submitButton').addEventListener('mousedown', () => {
     }
     let processBool = processForm.length >= 5 && processForm.every(e => e === processForm[0]);
     if (processBool) {
+
+        let bookName = allInputs[0].value,
+            authorname = allInputs[1].value,
+            pagesCount = allInputs[2].value,
+            readStatus = allInputs[3].value;
+
         ResetForm();
         form.style.display = 'none';
         processForm.length = 0;
-        AddBook();
+        AddBook(bookName,authorname,pagesCount,readStatus);
     }
 })
 
@@ -47,12 +53,9 @@ function ResetForm(){
     }
 }
 
-function AddBook() {
-    console.log('reached');
+function AddBook(name,author,pages,readStatus) {
+    
 }
-// let bookName = prompt('Please provide a book name' , '');
-// let pages = prompt('Please provide the no. of pages in the book you want to add' , '');
-// let readStatus = prompt('Did you read the book yet?', '');
 
 // let newBook = new Book(bookName,pages,readStatus);
 

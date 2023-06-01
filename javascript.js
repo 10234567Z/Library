@@ -11,6 +11,7 @@ let addButton = document.querySelector('.addBook');
 let form = document.querySelector('form');
 let allInputs = document.querySelectorAll('input');
 let processForm = [];
+let isRead = false;
 
 addButton.addEventListener('mousedown', () => {
 
@@ -22,6 +23,14 @@ addButton.addEventListener('mousedown', () => {
     else {
         form.style.display = 'grid';
     }
+})
+
+allInputs[3].addEventListener('mousedown' , () => {
+    isRead = true;
+})
+
+allInputs[4].addEventListener('mousedown' , () => {
+    isRead = false;
 })
 
 
@@ -37,8 +46,14 @@ document.querySelector('.submitButton').addEventListener('mousedown', () => {
         let bookName = allInputs[0].value,
             authorname = allInputs[1].value,
             pagesCount = allInputs[2].value,
-            readStatus = allInputs[3].value;
+            readStatus;
 
+        if(isRead){
+            readStatus = 'Yes';
+        }
+        else{
+            readStatus = 'No';
+        }
         ResetForm();
         form.style.display = 'none';
         processForm.length = 0;
@@ -54,8 +69,11 @@ function ResetForm(){
 }
 
 function AddBook(name,author,pages,readStatus) {
-    
+    console.log(name,author,pages,readStatus);
 }
+// let bookName = prompt('Please provide a book name' , '');
+// let pages = prompt('Please provide the no. of pages in the book you want to add' , '');
+// let readStatus = prompt('Did you read the book yet?', '');
 
 // let newBook = new Book(bookName,pages,readStatus);
 

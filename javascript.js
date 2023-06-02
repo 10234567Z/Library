@@ -10,6 +10,7 @@ let form = document.querySelector('form');
 let allInputs = document.querySelectorAll('input');
 let processForm = [];
 let isRead = false;
+let myLibrary = [];
 
 addButton.addEventListener('mousedown', () => {
 
@@ -68,6 +69,7 @@ function ResetForm(){
 
 function AddBook(name,author,pages,readStatus) {
     let newBook = new Book(name,author,pages,readStatus);
+    myLibrary.push(newBook);
     CreateBook(name,author,pages,readStatus);
 }
 
@@ -94,10 +96,25 @@ function CreateBook(name,author,pagesCount,readStatus){
     readingStatus.classList.add('isRead');
     readingStatus.innerHTML = `Read Status: ${readStatus}`;
 
+    /** Add buttons */
+    let operation = document.createElement('div');
+    operation.classList.add('operation');
+
+    let toggleRead = document.createElement('div');
+    toggleRead.classList.add('toggleRead');
+
+    let deleteButton = document.createElement('div');
+    deleteButton.classList.add('delete');
+
+
+    /** Append button to operational div */
+    operation.append(toggleRead,deleteButton);
+
     /** Append it all to parent */
 
-    newBookElement.append(nameBox,authorNameBox,pages,readingStatus);
+    newBookElement.append(nameBox,authorNameBox,pages,readingStatus,operation);
     document.querySelector('.collection').append(newBookElement);
+
 }
 // let bookName = prompt('Please provide a book name' , '');
 // let pages = prompt('Please provide the no. of pages in the book you want to add' , '');

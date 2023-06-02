@@ -32,6 +32,7 @@
     grid-template-rows: repeat(auto-fit,fit-content(400px));
     gap: 10px;
     align-items: start;
+    justify-items: center;
 }
 
 .addBook {
@@ -136,4 +137,11 @@ input[type='radio']{
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.newBook{
+    display: grid;
+    grid-template-rows: repeat(5,20%);
+    background-color: #8EA482;
+    width: 300px;
 }

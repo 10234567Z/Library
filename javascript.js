@@ -1,10 +1,8 @@
-function Book(bookName, pages, readStatus) {
+function Book(bookName, authorName, pages, readStatus) {
     this.bookName = bookName
+    this.authorName = authorName
     this.pages = pages
-    this.readStatus = readStatus
-    this.info = function () {
-        return `${bookName},${pages} pages,${readStatus}`
-    }
+    this.readStatus = readStatus;
 }
 
 let addButton = document.querySelector('.addBook');
@@ -69,7 +67,37 @@ function ResetForm(){
 }
 
 function AddBook(name,author,pages,readStatus) {
-    console.log(name,author,pages,readStatus);
+    let newBook = new Book(name,author,pages,readStatus);
+    CreateBook(name,author,pages,readStatus);
+}
+
+function CreateBook(name,author,pagesCount,readStatus){
+
+    /** Make the parent new book div */
+    let newBookElement = document.createElement('div');
+    newBookElement.classList.add('newBook');
+
+    /** Make elements inside it */
+    let nameBox = document.createElement('div');
+    nameBox.classList.add('bookNameShowed');
+    nameBox.innerHTML = name;
+
+    let authorNameBox = document.createElement('div');
+    authorNameBox.classList.add('author');
+    authorNameBox.innerHTML = `-by ${author}`;
+
+    let pages = document.createElement('div');
+    pages.classList.add('pages');
+    pages.innerHTML = `${pagesCount} pages`;
+
+    let readingStatus = document.createElement('div');
+    readingStatus.classList.add('isRead');
+    readingStatus.innerHTML = `Read Status: ${readStatus}`;
+
+    /** Append it all to parent */
+
+    newBookElement.append(nameBox,authorNameBox,pages,readingStatus);
+    document.querySelector('.collection').append(newBookElement);
 }
 // let bookName = prompt('Please provide a book name' , '');
 // let pages = prompt('Please provide the no. of pages in the book you want to add' , '');

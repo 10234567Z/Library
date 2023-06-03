@@ -3,6 +3,8 @@ function Book(bookName, authorName, pages, readStatus) {
     this.authorName = authorName
     this.pages = pages
     this.readStatus = readStatus;
+    this.info = function(){
+    }
 }
 
 let addButton = document.querySelector('.addBook');
@@ -24,11 +26,11 @@ addButton.addEventListener('mousedown', () => {
     }
 })
 
-allInputs[3].addEventListener('mousedown' , () => {
+allInputs[3].addEventListener('mousedown', () => {
     isRead = true;
 })
 
-allInputs[4].addEventListener('mousedown' , () => {
+allInputs[4].addEventListener('mousedown', () => {
     isRead = false;
 })
 
@@ -47,33 +49,54 @@ document.querySelector('.submitButton').addEventListener('mousedown', () => {
             pagesCount = allInputs[2].value,
             readStatus;
 
-        if(isRead){
+        if (isRead) {
             readStatus = 'Yes';
         }
-        else{
+        else {
             readStatus = 'No';
         }
         ResetForm();
         form.style.display = 'none';
         processForm.length = 0;
-        AddBook(bookName,authorname,pagesCount,readStatus);
+        AddBook(bookName, authorname, pagesCount, readStatus);
     }
 })
 
 
-function ResetForm(){
-    for(i = 0; i < allInputs.length; i++){
+function ResetForm() {
+    for (i = 0; i < allInputs.length; i++) {
         allInputs[i].value = '';
     }
 }
 
-function AddBook(name,author,pages,readStatus) {
-    let newBook = new Book(name,author,pages,readStatus);
+function AddBook(name, author, pages, readStatus) {
+    let newBook = new Book(name, author, pages, readStatus);
     myLibrary.push(newBook);
-    CreateBook(name,author,pages,readStatus);
+    CreateBook(name, author, pages, readStatus);
+
+    document.querySelector('.toggleRead').addEventListener('mousedown', function(e) {
+        let writtenName = e.target.parentNode.parentNode.firstChild.innerHTML;
+        let obj = myLibrary.find((n,i) => {
+            if(n.bookName === writtenName && n.readStatus === 'Yes'){
+                myLibrary[i] = { bookName: writtenName , authorName: n.authorName , pages: n.pages , readStatus: 'No'}
+                return true;
+            }
+            else if(n.bookName === writtenName && n.readStatus === 'No'){
+                myLibrary[i] = { bookName: writtenName , authorName: n.authorName , pages: n.pages , readStatus: 'Yes'}
+                return true;
+            }
+        })
+        if(document.querySelector('.isRead').innerHTML === 'Read Status: Yes'){
+            document.querySelector('.isRead').innerHTML = 'Read Status: No'
+        }
+        else{
+            document.querySelector('.isRead').innerHTML = 'Read Status: Yes'
+        }
+    })
 }
 
-function CreateBook(name,author,pagesCount,readStatus){
+
+function CreateBook(name, author, pagesCount, readStatus) {
 
     /** Make the parent new book div */
     let newBookElement = document.createElement('div');
@@ -108,11 +131,11 @@ function CreateBook(name,author,pagesCount,readStatus){
 
 
     /** Append button to operational div */
-    operation.append(toggleRead,deleteButton);
+    operation.append(toggleRead, deleteButton);
 
     /** Append it all to parent */
 
-    newBookElement.append(nameBox,authorNameBox,pages,readingStatus,operation);
+    newBookElement.append(nameBox, authorNameBox, pages, readingStatus, operation);
     document.querySelector('.collection').append(newBookElement);
 
 }

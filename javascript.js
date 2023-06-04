@@ -13,9 +13,9 @@ let allInputs = document.querySelectorAll('input');
 let isRead = false;
 let processForm = false;
 let myLibrary = [];
+let bookColor = "#8EA482"
 
 addButton.addEventListener('mousedown', () => {
-
     if (form.style.display === 'grid') {
         form.style.display = 'none';
         ResetForm();
@@ -43,8 +43,6 @@ document.querySelector('.submitButton').addEventListener('mousedown', () => {
             processForm = false;
         }
     }
-
-    console.log(processForm)
 
     if (processForm) {
         let bookName = allInputs[0].value,
@@ -88,6 +86,10 @@ function CreateBook(name, author, pagesCount, readStatus) {
     /** Make the parent new book div */
     let newBookElement = document.createElement('div');
     newBookElement.classList.add('newBook');
+
+    RandomColor();
+
+    newBookElement.style.backgroundColor = bookColor;
 
     /** Make elements inside it */
     let nameBox = document.createElement('div');
@@ -152,6 +154,17 @@ function CreateBook(name, author, pagesCount, readStatus) {
 
     newBookElement.append(nameBox, authorNameBox, pages, readingStatus, operation);
     document.querySelector('.collection').append(newBookElement);
+}
+
+function RandomColor() {
+    let lightLetters = "BCDEF".split('');
+    let color = '#'
+
+    for (i = 0; i < 6; i++){
+        color += lightLetters[Math.floor(Math.random() * lightLetters.length)];
+    }
+
+    bookColor = color;
 }
 
 

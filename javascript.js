@@ -35,10 +35,11 @@ radioButtons[1].addEventListener('mousedown', () => {
 
 document.querySelector('.submitButton').addEventListener('mousedown', (e) => {
     for (i = 0; i < allInputs.length; i++) {
-        if (document.getElementsByTagName('input')[i].checkValidity() && (isRead === false || isRead === true)) {
+        if (document.getElementsByTagName('input')[i].checkValidity() && (isRead === false || isRead === true) && parseInt(document.getElementsByTagName('input')[2].value) > 9) {
             processForm = true;
         }
         else {
+            document.getElementsByTagName('input')[2].validity = false;
             processForm = false;
         }
     }
@@ -58,6 +59,9 @@ document.querySelector('.submitButton').addEventListener('mousedown', (e) => {
         ResetForm();
         form.style.display = 'none';
         AddBook(bookName, authorname, pagesCount, readStatus);
+    }
+    else{
+        return false;
     }
     e.preventDefault();
 })

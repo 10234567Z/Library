@@ -18,15 +18,15 @@
         <form action="#" method="get">
             <div class="bookName">
                 <label for="name">Book Name<br></label>
-                <input type="text" id="name" class="textInput" required>
+                <input type="text" id="name" class="textInput" maxlength="32" required>
             </div>
             <div class="writerName">
                 <label for="authorName">Author Name<br></label>
-                <input type="text" id="authorName" class="textInput" required>
+                <input type="text" id="authorName" class="textInput" maxlength="32" required>
             </div>
             <div class="pagesAmount">
                 <label for="pages">No. of Pages<br></label>
-                <input type="tel" id="pages" maxlength="4" class="textInput" pattern="[0-9\/]*" required>
+                <input type="tel" id="pages" maxlength="4" minlength="2" class="textInput" placeholder="10 - 9999" pattern="[0-9\/]*" required>
             </div>
             <div class="status">
                 <label for="readStatus">Have you read the complete book?</label>

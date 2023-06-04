@@ -86,6 +86,10 @@ function CreateBook(name, author, pagesCount, readStatus) {
     /** Make the parent new book div */
     let newBookElement = document.createElement('div');
     newBookElement.classList.add('newBook');
+    
+    newBookElement.addEventListener('click' ,(e) => {
+        form.style.display = 'none';
+    })
 
     RandomColor();
 

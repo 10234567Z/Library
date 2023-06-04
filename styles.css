@@ -200,13 +200,3 @@ input[type='radio'] {
 input:invalid {
     border-color: black;
 }
-
-.bookNameShowed,
-.author,
-.pages,
-.isRead,
-.toggleRead,
-.delete {
-
-    
-}

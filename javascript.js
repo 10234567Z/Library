@@ -3,14 +3,13 @@ function Book(bookName, authorName, pages, readStatus) {
     this.authorName = authorName
     this.pages = pages
     this.readStatus = readStatus;
-    this.info = function () {
-    }
 }
 
 let addButton = document.querySelector('.addBook');
 let form = document.querySelector('form');
-let allInputs = document.querySelectorAll('input');
-let isRead = false;
+let allInputs = document.querySelectorAll('.textInput');
+let radioButtons = document.getElementsByName("readStatus")
+let isRead;
 let processForm = false;
 let myLibrary = [];
 let bookColor = "#8EA482"
@@ -25,18 +24,18 @@ addButton.addEventListener('mousedown', () => {
     }
 })
 
-allInputs[3].addEventListener('mousedown', () => {
+radioButtons[0].addEventListener('mousedown', () => {
     isRead = true;
 })
 
-allInputs[4].addEventListener('mousedown', () => {
+radioButtons[1].addEventListener('mousedown', () => {
     isRead = false;
 })
 
 
-document.querySelector('.submitButton').addEventListener('mousedown', () => {
+document.querySelector('.submitButton').addEventListener('mousedown', (e) => {
     for (i = 0; i < allInputs.length; i++) {
-        if (allInputs[i].checkValidity() === true) {
+        if (document.getElementsByTagName('input')[i].checkValidity() && (isRead === false || isRead === true)) {
             processForm = true;
         }
         else {
@@ -60,6 +59,7 @@ document.querySelector('.submitButton').addEventListener('mousedown', () => {
         form.style.display = 'none';
         AddBook(bookName, authorname, pagesCount, readStatus);
     }
+    e.preventDefault();
 })
 
 
@@ -67,8 +67,8 @@ function ResetForm() {
     for (i = 0; i < allInputs.length; i++) {
         allInputs[i].value = '';
     }
-    allInputs[3].checked = false;
-    allInputs[4].checked = false;
+    radioButtons[0].checked = false;
+    radioButtons[1].checked = false;
 }
 
 function AddBook(name, author, pages, readStatus) {
@@ -160,7 +160,7 @@ function RandomColor() {
     let lightLetters = "BCDEF".split('');
     let color = '#'
 
-    for (i = 0; i < 6; i++){
+    for (i = 0; i < 6; i++) {
         color += lightLetters[Math.floor(Math.random() * lightLetters.length)];
     }
 

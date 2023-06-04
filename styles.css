@@ -65,7 +65,7 @@
 
 form {
     right: 0;
-    bottom: 16vh;
+    bottom: 18vh;
     display: none;
     position: fixed;
     background-color: #588EB9;
@@ -74,11 +74,12 @@ form {
     padding: 10px;
     grid-template-rows: repeat(auto-fit, 1fr);
     gap: 10px;
-    width: 300px;
-    height: 500px;
+    width: 350px;
+    height: 550px;
     transition: .6s ease transform;
     border: 5px outset #B9B9B9;
     margin-right: 25px;
+    overflow: hidden;
 }
 
 form>div {

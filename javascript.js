@@ -18,12 +18,8 @@ let bookColor = "#8EA482"
 class AddBook extends Book {
     constructor(Bname, author, pages, readStatus) {
         super(Bname, author, pages, readStatus)
-        this.Bname = Bname;
-        this.author = author;
-        this.pages = pages;
-        this.readStatus = readStatus;
-        this.newBook = new Book(this.Bname,this.author,this.pages,this.readStatus);
-        CreateBook(this.Bname, this.author, this.pagesCount, this.readStatus, this.newBook);
+        this.newBook = new Book(Bname,author,pages,readStatus);
+        CreateBook(Bname, author, pages, readStatus, this.newBook);
     }
     processForm = false;
 }

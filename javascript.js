@@ -18,8 +18,8 @@ let bookColor = "#8EA482"
 class AddBook extends Book {
     constructor(Bname, author, pages, readStatus) {
         super(Bname, author, pages, readStatus)
-        this.newBook = new Book(Bname,author,pages,readStatus);
-        CreateBook(Bname, author, pages, readStatus, this.newBook);
+        this.newBook = new Book(Bname, author, pages, readStatus);
+        CreateBook(this.newBook);
     }
     processForm = false;
 }
@@ -69,7 +69,8 @@ document.querySelector('.submitButton').addEventListener('mousedown', (e) => {
             readStatus = 'No';
         }
         ResetForm();
-        form.style.display = 'none';
+        form.style.visibility = 'hidden';
+        form.style.opacity = 0;
         new AddBook(bookName, authorname, pagesCount, readStatus);
     }
     else {
@@ -87,83 +88,84 @@ function ResetForm() {
     radioButtons[1].checked = false;
 }
 
-function CreateBook(name, author, pagesCount, readStatus, newBook) {
+function CreateBook(newBook) {
     myLibrary.push(newBook);
-    /** Make the parent new book div */
-    let newBookElement = document.createElement('div');
-    newBookElement.classList.add('newBook');
+    document.querySelector('.collection').innerHTML = '';
+    for (let i = 0; i < myLibrary.length; i++) {
+        /** Make the parent new book div */
+        let newBookElement = document.createElement('div');
+        newBookElement.classList.add('newBook');
 
-    newBookElement.addEventListener('click', (e) => {
-        form.style.display = 'none';
-    })
+        newBookElement.addEventListener('click', (e) => {
+            form.style.visibility = 'hidden';
+            form.style.opacity = '0';
+        })
 
-    RandomColor();
-
-    newBookElement.style.backgroundColor = bookColor;
-
-    /** Make elements inside it */
-    let nameBox = document.createElement('div');
-    nameBox.classList.add('bookNameShowed');
-    nameBox.innerHTML = name;
-
-    let authorNameBox = document.createElement('div');
-    authorNameBox.classList.add('author');
-    authorNameBox.innerHTML = `-by ${author}`;
-
-    let pages = document.createElement('div');
-    pages.classList.add('pages');
-    if (parseInt(pagesCount) > 1) {
-        pages.innerHTML = `${pagesCount} pages`;
-    }
-    else {
-        pages.innerHTML = `${pagesCount} page`;
-    }
-
-    let readingStatus = document.createElement('div');
-    readingStatus.classList.add('isRead');
-    readingStatus.innerHTML = `Read Status: ${readStatus}`;
-
-    /** Add buttons */
-    let operation = document.createElement('div');
-    operation.classList.add('operation');
-
-    let toggleRead = document.createElement('div');
-    toggleRead.classList.add('toggleRead');
+        RandomColor();
+        newBookElement.style.backgroundColor = bookColor;
 
 
-    toggleRead.addEventListener('mousedown', e => {
-        let writtenName = e.target.parentNode.parentNode.firstChild.innerHTML;
-        myLibrary.find((n, i) => {
-            if (n.bookName === writtenName && n.readStatus === 'Yes') {
-                myLibrary[i] = { bookName: writtenName, authorName: n.authorName, pages: n.pages, readStatus: 'No' }
-                readingStatus.innerHTML = 'Read Status: No'
+        /** Make elements inside it */
+        let nameBox = document.createElement('div');
+        nameBox.classList.add('bookNameShowed');
+        nameBox.textContent = myLibrary[i].bookName;
+
+        let authorNameBox = document.createElement('div');
+        authorNameBox.classList.add('author');
+        authorNameBox.textContent = `-by ${myLibrary[i].authorName}`;
+
+        let pages = document.createElement('div');
+        pages.classList.add('pages');
+        if (parseInt(myLibrary[i].pages) > 1) {
+            pages.textContent = `${myLibrary[i].pages} pages`;
+        }
+        else {
+            pages.textContent = `${myLibrary[i].pagest} page`;
+        }
+
+        let readingStatus = document.createElement('div');
+        readingStatus.classList.add('isRead');
+        readingStatus.textContent = `Read Status: ${myLibrary[i].readStatus}`;
+
+        /** Add buttons */
+        let operation = document.createElement('div');
+        operation.classList.add('operation');
+
+        let toggleRead = document.createElement('div');
+        toggleRead.classList.add('toggleRead');
+
+        toggleRead.addEventListener('mousedown', e => {
+            let writtenName = e.target.parentNode.parentNode.firstChild.innerHTML;
+            if (myLibrary[i].bookName === writtenName && myLibrary[i].readStatus === 'Yes') {
+                myLibrary[i] = { bookName: writtenName, authorName: myLibrary[i].authorName, pages: myLibrary[i].pages, readStatus: 'No' }
+                readingStatus.textContent = 'Read Status: No'
                 return true;
             }
-            else if (n.bookName === writtenName && n.readStatus === 'No') {
-                myLibrary[i] = { bookName: writtenName, authorName: n.authorName, pages: n.pages, readStatus: 'Yes' }
-                readingStatus.innerHTML = 'Read Status: Yes'
+            else if (myLibrary[i].bookName === writtenName && myLibrary[i].readStatus === 'No') {
+                myLibrary[i] = { bookName: writtenName, authorName: myLibrary[i].authorName, pages: myLibrary[i].pages, readStatus: 'Yes' }
+                readingStatus.textContent = 'Read Status: Yes'
                 return true;
             }
         })
-    })
 
-    let deleteButton = document.createElement('div');
-    deleteButton.classList.add('delete');
-    deleteButton.addEventListener('mousedown', e => {
-        let writtenName = e.target.parentNode.parentNode.firstChild.innerHTML;
-        let index = myLibrary.findIndex(e => e.bookName === writtenName);
-        myLibrary.splice(index, 1);
-        newBookElement.remove();
-    })
+        let deleteButton = document.createElement('div');
+        deleteButton.classList.add('delete');
 
+        deleteButton.addEventListener('mousedown', e => {
+            let writtenName = e.target.parentNode.parentNode.firstChild.innerHTML;
+            let index = myLibrary.findIndex(e => e.bookName === writtenName);
+            myLibrary.splice(index, 1);
+            newBookElement.remove();
+        })
 
-    /** Append button to operational div */
-    operation.append(toggleRead, deleteButton);
+        /** Append button to operational div */
+        operation.append(toggleRead, deleteButton);
 
-    /** Append it all to parent */
+        /** Append it all to parent */
 
-    newBookElement.append(nameBox, authorNameBox, pages, readingStatus, operation);
-    document.querySelector('.collection').append(newBookElement);
+        newBookElement.append(nameBox, authorNameBox, pages, readingStatus, operation);
+        document.querySelector('.collection').append(newBookElement);
+    }
 }
 
 function RandomColor() {

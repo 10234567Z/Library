@@ -66,21 +66,22 @@
 form {
     right: 0;
     bottom: 18vh;
-    display: none;
+    display:grid;
     position: fixed;
-    background-color: #588EB9;
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     transition: all 0.7s;
     padding: 10px;
     grid-template-rows: repeat(auto-fit, 1fr);
     gap: 10px;
     width: 350px;
-    height: 550px;
-    transition: .6s ease transform;
-    border: 5px outset #B9B9B9;
+    border: 5px ridge #B9B9B9;
     margin-right: 25px;
     overflow: hidden;
     font-weight: bolder;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 400ms ease-in-out;
 }
 
 form>div {
@@ -103,7 +104,7 @@ input[type='text'] {
     font-size: 1.5rem;
     padding: 10px;
     width: 100%;
-    border: 4px double #B90000;
+    border: 2px ridge #B90000;
 }
 
 .status {
@@ -123,7 +124,7 @@ input[type='text'] {
     font-size: 1.2em;
     outline: none !important;
     background-color: #B96E6E;
-    border: 4px ridge #B90000;
+    border: 3px ridge #B90000;
 }
 
 .submitButton:hover {

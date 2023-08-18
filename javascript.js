@@ -25,12 +25,14 @@ class AddBook extends Book {
 }
 
 addButton.addEventListener('mousedown', () => {
-    if (form.style.display === 'grid') {
-        form.style.display = 'none';
+    if (form.style.visibility === 'visible') {
+        form.style.visibility = 'hidden';
+        form.style.opacity = '0';
         ResetForm();
     }
     else {
-        form.style.display = 'grid';
+        form.style.visibility = 'visible';
+        form.style.opacity = '1';
     }
 })
 
